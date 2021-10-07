@@ -3,7 +3,7 @@
 
 <div class="header"> 
                         <h1 class="page-header">
-                            Siswa <small>Summary of your App</small>
+                            {{$judul}} <small>Summary of your App</small>
                         </h1>
 						
 									
@@ -15,7 +15,7 @@
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             Advanced Tables
+                            Tabel {{$judul}} 
                         </div>
                         <br>
                         <div class="">
@@ -36,19 +36,19 @@
                                 </ul>
                             </div>
                         @endif
-                        <button class="btn btn-success" data-toggle="modal" data-target="#modalTambah">Tambah Siswa</button>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#modalTambah">Tambah {{$judul}}</button>
                         </div>
                         <div class="panel-body">
                         
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="dataTableSiswa">
+                                <table class="table table-striped table-bordered table-hover" id="dataTableBuku">
                                     <thead>
                                         <tr>
                                             <!-- <th>No</th> -->
-                                            <th>NIS</th>
-                                            <th>Nama</th>
-                                            <th>Alamat</th>
-                                            <th>No Telepon</th>
+                                            <th>Judul Buku</th>
+                                            <th>Penerbit</th>
+                                            <th>Tahun Terbit</th>
+                                            
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -68,24 +68,21 @@
                                             <h4 class="modal-title" id="myModalLabel">Tambah Siswa</h4>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="{{route('siswa.store')}}" method="POST">
+                                            <form action="{{route('buku.store')}}" method="POST">
                                             @csrf
-                                            <input type="hidden" name="id_siswa" value="{{$uuid}}">
+                                            <input type="hidden" name="id_buku" value="{{$uuid}}">
                                                 <div class="form-group">
-                                                    <label>NIS</label>
-                                                    <input class="form-control" placeholder="Enter text" name="nis" value="{{old('nis')}} ">
+                                                    <label>Judul Buku</label>
+                                                    <input class="form-control" placeholder="Enter text" name="judul_buku" value="{{old('judul_buku')}} ">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Nama</label>
-                                                    <input class="form-control" placeholder="Enter text" name="nama" value ="{{old('nama')}}">
+                                                    <label>Nama Penerbit</label>
+                                                    <input class="form-control" placeholder="Enter text" name="penerbit" value ="{{old('penerbit')}}">
                                                 </div>
+                                                
                                                 <div class="form-group">
-                                                    <label>Alamat</label>
-                                                    <textarea name="alamat" id="alamat" cols="" rows="" class="form-control" placeholder="Enter text">{{old('alamat')}} </textarea>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>No Telepon</label>
-                                                    <input class="form-control" placeholder="Enter text" name="no_telepon" value="{{old('no_telepon')}}" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
+                                                    <label>Tahun</label>
+                                                    <input class="form-control" placeholder="Enter text" name="tahun_terbit" value="{{old('tahun_terbit')}}" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
                                                 </div>
                                         </div>
                                         <div class="modal-footer">
@@ -103,27 +100,23 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            <h4 class="modal-title" id="myModalLabel">Tambah Siswa</h4>
+                                            <h4 class="modal-title" id="myModalLabel">Tambah {{$judul}}</h4>
                                         </div>
                                         <div class="modal-body">
                                             <form method="POST" id="form_edit">
                                             @csrf
                                             @method('PUT')
                                                 <div class="form-group">
-                                                    <label>NIS</label>
-                                                    <input class="form-control" placeholder="Enter text" name="nis" id ="nis_edit" readonly>
+                                                    <label>Judul Buku</label>
+                                                    <input class="form-control" placeholder="Enter text" name="judul_buku" id ="judul_buku_edit" readonly>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Nama</label>
-                                                    <input class="form-control" placeholder="Enter text" name="nama" id="nama_edit">
+                                                    <label>Nama Penerbit</label>
+                                                    <input class="form-control" placeholder="Enter text" name="penerbit" id="penerbit_edit">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Alamat</label>
-                                                    <textarea name="alamat" id="alamat_edit" cols="" rows="" class="form-control" placeholder="Enter text"></textarea>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>No Telepon</label>
-                                                    <input class="form-control" placeholder="Enter text" name="no_telepon" id = "no_telepon_edit" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
+                                                    <label>Tahun Terbit</label>
+                                                    <input class="form-control" placeholder="Enter text" name="tahun_terbit" id = "tahun_terbit_edit" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
                                                 </div>
                                                 
                                             
@@ -137,53 +130,54 @@
                                 </div>
                             </div>
 <script>
-    function fungsiEdit(nis, nama, alamat, no_telepon){
+    function fungsiEdit(){
         
-        var id_siswa = $('#edit').attr('data-id');
-        var nis = $('#edit').attr('data-nis');
-        var nama = $('#edit').attr('data-nama');
-        var alamat = $('#edit').attr('data-alamat');
-        var no_telepon = $('#edit').attr('data-no_telepon');
-        $('#form_edit').attr('action', "{{route('siswa.update', '')}}"+"/"+nis);
-        $('#nis_edit').val(nis);
-        $('#nama_edit').val(nama);
-        $('#alamat_edit').text(alamat);
-        $('#no_telepon_edit').val(no_telepon);
+        var id_buku = $('#edit').attr('data-id');
+        var judul_buku = $('#edit').attr('data-judul_buku');
+        var penerbit = $('#edit').attr('data-penerbit');
+        var tahun_terbit = $('#edit').attr('data-tahun_terbit');
+        $('#form_edit').attr('action', "{{route('buku.update', '')}}"+"/"+id_buku);
+        $('#judul_buku_edit').val(judul_buku);
+        $('#penerbit_edit').val(penerbit);
+        $('#tahun_terbit_edit').val(tahun_terbit);
     }
 </script>
 <script>
+    $(document).ready(function () {
+       
+    });
+</script>
+<script>
         $(document).ready(function() {
-            $('#dataTableSiswa').DataTable( {
+            $('#dataTableBuku').DataTable( {
                 processing: true,
                 pageLength: 25,
                 serverSide: true,
                 searchable: true,
                 ajax: {
-                    url: "{{route('siswa.json')}}"
+                    url: "{{route('buku.json')}}"
                 },
                 columns: [
+                    
                     {
-                        data: 'nis',
-                        name: 'nis'
+                        data: 'judul_buku',
+                        name: 'judul_buku'
                     },
                     {
-                        data: 'nama',
-                        name: 'nama'
+                        data: 'penerbit',
+                        name: 'penerbit'
                     },
                     {
-                        data: 'alamat',
-                        name: 'alamat'
+                        data: 'tahun_terbit',
+                        name: 'tahun_terbit'
                     },
                     {
-                        data: 'no_telepon',
-                        name: 'no_telepon'
-                    },
-                    {
-                        data:'action',
-                        name:'action'
+                        data: 'action',
+                        name: 'action'
                     }
                 ],
             } );
+             $('#btn_hapus').attr('onclick', "return confirm('Yakin Hapus?')");
         } );
 </script>
 @endsection

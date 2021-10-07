@@ -21,11 +21,19 @@ Route::get('/admin/', function ()
 {
     return redirect('admin/dashboard');
 });
-// Route::get('/admin/dashboard','AdminController@index')->middleware('auth');
-
+//DASHBOARD
+Route::resource('admin/dashboard', admin\DashboardController::class)->middleware('auth');
+//SISWA
 Route::get('admin/siswa/delete/{nis}', 'admin\SiswaController@destroy')->middleware('auth')->name('siswa.delete');
 Route::get('admin/siswa/json_siswa', 'admin\SiswaController@json_siswa')->middleware('auth')->name('siswa.json');
 Route::get('admin/siswa/json_siswa_by_id/{id_siswa}', 'admin\SiswaController@json_siswa_by_id')->middleware('auth')->name('siswa.json.edit');
-Route::resource('admin/dashboard', admin\DashboardController::class)->middleware('auth');
 Route::resource('admin/siswa', admin\SiswaController::class)->middleware('auth');
+//BUKU
+Route::get('admin/buku/delete/{id_buku}', 'admin\BukuController@destroy')->middleware('auth')->name('buku.delete');
+Route::get('admin/buku/delete/{id_buku}', 'admin\BukuController@destroy')->middleware('auth')->name('buku.delete');
+Route::get('admin/buku/json_buku', 'admin\BukuController@json_buku')->middleware('auth')->name('buku.json');
+Route::resource('admin/buku', admin\BukuController::class)->middleware('auth');
+
+
+
 

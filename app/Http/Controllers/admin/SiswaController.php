@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use DataTables as dt;
+use Illuminate\Support\Str;
 class SiswaController extends Controller
 {
     /**
@@ -18,10 +19,9 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        // $siswa = Siswa::all();
-        //  return view('admin.siswa.siswa',compact('siswa'))
-        //     ->with('i');
-        return view('admin.siswa.siswa');
+        $uuid = Str::uuid();
+        
+        return view('admin.siswa.siswa')->with('uuid', $uuid);
     }
     public function json_siswa()
     {
@@ -45,23 +45,6 @@ class SiswaController extends Controller
         $data = Siswa::where('id_siswa',$id_siswa)->first();
         return Response::json($data);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $messages = [
@@ -70,11 +53,13 @@ class SiswaController extends Controller
             'max' => ':attribute harus diisi maksimal :max karakter ya cuy!!!',
         ];
          $validator =  Validator::make($request->all(), [
-            'nis' => 'required|min:5',
+            'nis' => 'required|min:3',
             'nama' => 'required|min:5',
             'alamat' => 'required|min:5',
             'no_telepon' => 'required|min:5',
+            'id_siswa' => 'required|min:20',
          ], $messages);
+        //  print_r($request->all());
          if(!$validator->fails()){
             Siswa::create($request->all());
             return redirect()->route('siswa.index')->with('success', 'Data Berhasil Ditambah');
@@ -82,36 +67,6 @@ class SiswaController extends Controller
             return redirect()->route('siswa.index')->withErrors($validator)->withInput();
          }
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $nis)
     {
         $messages = [
@@ -120,7 +75,7 @@ class SiswaController extends Controller
             'max' => ':attribute harus diisi maksimal :max karakter ya cuy!!!',
         ];
          $validator =  Validator::make($request->all(), [
-            'nis' => 'required|min:5',
+            'nis' => 'required|min:3',
             'nama' => 'required|min:5',
             'alamat' => 'required|min:5',
             'no_telepon' => 'required|min:5',
@@ -132,7 +87,6 @@ class SiswaController extends Controller
                 'alamat'=> $request->alamat,
                 'no_telepon'=> $request->no_telepon,
             ]);
-            
             return redirect()->route('siswa.index')->with('success', 'Data Berhasil Disunting');
          }else{
             return redirect()->route('siswa.index')->withErrors($validator)->withInput();
