@@ -137,19 +137,23 @@
                                 </div>
                             </div>
 <script>
-    function fungsiEdit(nis, nama, alamat, no_telepon){
-        
-        var id_siswa = $('#edit').attr('data-id');
-        var nis = $('#edit').attr('data-nis');
-        var nama = $('#edit').attr('data-nama');
-        var alamat = $('#edit').attr('data-alamat');
-        var no_telepon = $('#edit').attr('data-no_telepon');
+    $(document).on('click','#edit', function (event) {
+        event.preventDefault();
+        var id_siswa = $(this).attr('data-id');
+        var nis = $(this).attr('data-nis');
+        var nama = $(this).attr('data-nama');
+        var alamat = $(this).attr('data-alamat');
+        var no_telepon = $(this).attr('data-no_telepon');
+        $('#modalEdit').modal('show');
         $('#form_edit').attr('action', "{{route('siswa.update', '')}}"+"/"+nis);
         $('#nis_edit').val(nis);
         $('#nama_edit').val(nama);
         $('#alamat_edit').text(alamat);
         $('#no_telepon_edit').val(no_telepon);
-    }
+    });
+        
+        
+    
 </script>
 <script>
         $(document).ready(function() {

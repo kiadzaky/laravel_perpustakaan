@@ -30,8 +30,8 @@ class SiswaController extends Controller
         return dt::of($data)->addColumn('action', function ($data)
         {
             return ' 
-            <a data-toggle="modal" id="edit" data-target="#modalEdit" class="btn btn-success" data-id="'.$data->id_siswa.'" data-nis="'.$data->nis.'"
-            data-nama = "'.$data->nama.'" data-alamat="'.$data->alamat.'" data-no_telepon = "'.$data->no_telepon.'" onclick="fungsiEdit()">Edit</a> 
+            <a id="edit" data-target="#modalEdit" class="btn btn-success" data-id="'.$data->id_siswa.'" data-nis="'.$data->nis.'"
+            data-nama = "'.$data->nama.'" data-alamat="'.$data->alamat.'" data-no_telepon = "'.$data->no_telepon.'" onclick = "fungsiEdit("'.$data->nis.'")">Edit</a> 
                                         
                                         
             <a href="'.route("siswa.delete", $data->nis ).'" class="btn btn-danger" onclick="return confirm("Yakin Hapus?")">Hapus</a> 

@@ -38,7 +38,7 @@ class BukuController extends Controller
         return dt::of($data)->addColumn('action', function ($data)
         {
             return ' 
-            <a data-toggle="modal" id="edit" data-target="#modalEdit" class="btn btn-success" data-id="'.$data->id_buku.'"
+            <a id="edit" data-target="#modalEdit" class="btn btn-success" data-id="'.$data->id_buku.'"
             data-judul_buku = "'.$data->judul_buku.'" data-penerbit="'.$data->penerbit.'" data-tahun_terbit = "'.$data->tahun_terbit.'" onclick="fungsiEdit()">Edit</a> 
                                         
                                         

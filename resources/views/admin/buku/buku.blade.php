@@ -130,21 +130,17 @@
                                 </div>
                             </div>
 <script>
-    function fungsiEdit(){
-        
-        var id_buku = $('#edit').attr('data-id');
-        var judul_buku = $('#edit').attr('data-judul_buku');
-        var penerbit = $('#edit').attr('data-penerbit');
-        var tahun_terbit = $('#edit').attr('data-tahun_terbit');
+    $(document).on('click','#edit', function (event) {
+        event.preventDefault();
+        $('#modalEdit').modal('show');
+        var id_buku = $(this).attr('data-id');
+        var judul_buku = $(this).attr('data-judul_buku');
+        var penerbit = $(this).attr('data-penerbit');
+        var tahun_terbit = $(this).attr('data-tahun_terbit');
         $('#form_edit').attr('action', "{{route('buku.update', '')}}"+"/"+id_buku);
         $('#judul_buku_edit').val(judul_buku);
         $('#penerbit_edit').val(penerbit);
         $('#tahun_terbit_edit').val(tahun_terbit);
-    }
-</script>
-<script>
-    $(document).ready(function () {
-       
     });
 </script>
 <script>
