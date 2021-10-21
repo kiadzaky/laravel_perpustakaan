@@ -15,7 +15,7 @@ class PeminjamanTable extends Migration
     {
        Schema::create('peminjaman', function (Blueprint $table) {
             $table->uuid('id_peminjaman')->primary();
-            $table->string('nis', 6);
+            $table->uuid('id_siswa');
             $table->uuid('id_buku');
             $table->datetime('tgl_peminjaman');
             $table->datetime('tgl_pengembalian');

@@ -18,6 +18,8 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="{{asset('assets/js/Lightweight-Chart/cssCharts.css')}}"> 
     <link href="{{asset('')}}assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 </head>
     <script src="{{asset('assets/js/jquery-1.10.2.js')}}"></script>
     
@@ -35,10 +37,13 @@
 	<script src="{{asset('')}}assets/js/easypiechart-data.js"></script>
 	
 	<script src="{{asset('')}}assets/js/Lightweight-Chart/jquery.chart.js"></script>
+    
+    
 	
      <!-- DATA TABLE SCRIPTS -->
     <script src="{{asset('')}}assets/js/dataTables/jquery.dataTables.js"></script>
     <script src="{{asset('')}}assets/js/dataTables/dataTables.bootstrap.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <body>
     <div id="wrapper">
         <nav class="navbar navbar-default top-navbar" role="navigation">
@@ -93,7 +98,7 @@
                             <a href="{{url('admin/buku')}}"><i class="fa fa-edit"></i> Tambah Buku</a>
                         </li>
                         
-                            <li>
+                            <!-- <li>
                                 <a href="#">Second Level Link</a>
                             </li>
                             <li>
@@ -111,11 +116,20 @@
 
                                 </ul>
 
-                            </li>
+                            </li> -->
                         </ul>
                     </li>
 					<li>
-                        <a href="chart.html"><i class="fa fa-bar-chart-o"></i> Charts</a>
+                        <a href="#"><i class="fa fa-sitemap"></i> Aktifitas<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            
+                        <li>
+                            <a href="{{url('admin/peminjaman')}}"><i class="fa fa-qrcode"></i> Tambah Peminjaman</a>
+                        </li>
+                        <li>
+                            <a href="{{url('admin/buku')}}"><i class="fa fa-edit"></i> Tambah Buku</a>
+                        </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="tab-panel.html"><i class="fa fa-qrcode"></i> Tabs & Panels</a>

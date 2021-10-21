@@ -33,6 +33,11 @@ Route::get('admin/buku/delete/{id_buku}', 'admin\BukuController@destroy')->middl
 Route::get('admin/buku/delete/{id_buku}', 'admin\BukuController@destroy')->middleware('auth')->name('buku.delete');
 Route::get('admin/buku/json_buku', 'admin\BukuController@json_buku')->middleware('auth')->name('buku.json');
 Route::resource('admin/buku', admin\BukuController::class)->middleware('auth');
+//PEMINJAMAN
+// Route::get('admin/buku/delete/{id_buku}', 'admin\BukuController@destroy')->middleware('auth')->name('buku.delete');
+// Route::get('admin/buku/delete/{id_buku}', 'admin\BukuController@destroy')->middleware('auth')->name('buku.delete');
+Route::get('admin/peminjaman/pinjam_json_buku/', 'admin\PeminjamanController@pinjam_json_buku')->middleware('auth')->name('pinjam.buku.json');
+Route::resource('admin/peminjaman', admin\PeminjamanController::class)->middleware('auth');
 
 
 
